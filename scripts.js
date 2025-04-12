@@ -28,21 +28,30 @@
 
 // This function adds cards the page to display the data in the array
 
-function showCards() {
+/**
+ * Main JavaScript for the UFC Fighters Catalog
+ * This handles displaying, filtering, and searching through fighters.
+ */
+
+
+let currentFighters = [...fighters]; // The list currently being displayed
+
+// Show all fighter cards on the page (default = all fighters)
+function showCards(filtered = fighters) {
   const cardContainer = document.getElementById("card-container");
-  cardContainer.innerHTML = "";
+  cardContainer.innerHTML = ""; // Clear existing cards
   const templateCard = document.querySelector(".card");
 
-  for (let i = 0; i < fighters.length; i++) {
-    const fighter = fighters[i];
-
-    const nextCard = templateCard.cloneNode(true);
-    editCardContent(nextCard, fighter);  // pass entire object now
-    cardContainer.appendChild(nextCard);
+  // Loop through the fighter data and create a card for each one
+  for (let i = 0; i < filtered.length; i++) {
+    const fighter = filtered[i];
+    const nextCard = templateCard.cloneNode(true); // Clone hidden template
+    editCardContent(nextCard, fighter); // Fill in fighter data
+    cardContainer.appendChild(nextCard); // Add to page
   }
 }
 
-
+// Fill in content for a single card with fighter data
 function editCardContent(card, fighter) {
   card.style.display = "block";
 
@@ -62,10 +71,10 @@ function editCardContent(card, fighter) {
   `;
 }
 
-
-// This calls the addCards() function when the page is first loaded
+// Runs once when the page first loads, displays all cards
 document.addEventListener("DOMContentLoaded", showCards);
 
+// Pops up a fun quote when "Get A Quote!" is clicked
 function quoteAlert() {
   console.log("Button Clicked!");
   alert(
@@ -73,7 +82,93 @@ function quoteAlert() {
   );
 }
 
-function removeLastCard() {
-  titles.pop(); // Remove last item in titles array
-  showCards(); // Call showCards again to refresh
+// Filter fighters based on selected dropdown values
+function filterFighters() {
+  const weightValue = document.getElementById("weight-filter").value;
+  const styleValue = document.getElementById("style-filter").value;
+
+  currentFighters = fighters.filter(f => {
+    const matchWeight = weightValue === "" || f.weightClass.includes(weightValue);
+    const matchStyle = styleValue === "" || f.style.includes(styleValue);
+    return matchWeight && matchStyle;
+  });
+
+  showCards(currentFighters);
 }
+
+
+// Render filtered fighter cards to the page
+function displayFilteredFighters(filteredList) {
+  const cardContainer = document.getElementById("card-container");
+  cardContainer.innerHTML = "";
+  const templateCard = document.querySelector(".card");
+
+  filteredList.forEach(fighter => {
+    const nextCard = templateCard.cloneNode(true);
+    editCardContent(nextCard, fighter);
+    cardContainer.appendChild(nextCard);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  showCards();
+
+  // Filter Toggle
+  const filterToggle = document.getElementById("filter-toggle");
+  const filterMenu = document.getElementById("filter-menu");
+  filterToggle.addEventListener("click", () => {
+    filterMenu.classList.toggle("hidden");
+  });
+
+  // Filters
+  document.getElementById("weight-filter").addEventListener("change", filterFighters);
+  document.getElementById("style-filter").addEventListener("change", filterFighters);
+
+  // Search
+  const searchInput = document.getElementById("search-input");
+  searchInput.addEventListener("input", function () {
+    const query = this.value.toLowerCase();
+
+    currentFighters = fighters.filter((fighter) => {
+      return (
+        fighter.firstName.toLowerCase().includes(query) ||
+        fighter.lastName.toLowerCase().includes(query) ||
+        fighter.nickname.toLowerCase().includes(query) ||
+        fighter.weightClass.toLowerCase().includes(query) ||
+        fighter.style.toLowerCase().includes(query) ||
+        fighter.rank.toLowerCase().includes(query)
+      );
+    });
+
+showCards(currentFighters);
+
+
+    showCards(filteredFighters);
+  });
+
+  // Sort
+  const sortSelect = document.getElementById("sort-select");
+  sortSelect.addEventListener("change", function () {
+    const selected = this.value;
+    sortFighters(selected);
+  });
+});
+
+
+function sortFighters(criterion) {
+  let sorted = [...currentFighters];
+
+  if (criterion === "wins") {
+    sorted.sort((a, b) => b.wins - a.wins);
+  } else if (criterion === "losses") {
+    sorted.sort((a, b) => b.losses - a.losses);
+  } else if (criterion === "lastName") {
+    sorted.sort((a, b) => a.lastName.localeCompare(b.lastName));
+  } else if (criterion === "record") {
+    const winRate = (f) => f.wins / (f.wins + f.losses);
+    sorted.sort((a, b) => winRate(b) - winRate(a));
+  }
+
+  showCards(sorted);
+}
+

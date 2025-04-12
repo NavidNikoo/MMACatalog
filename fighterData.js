@@ -572,8 +572,8 @@ fighters.push(
     image: AlexPereira_URL
   },
   {
-    firstName: "Jiří",
-    lastName: "Procházka",
+    firstName: "Jiri",
+    lastName: "Prochazka",
     nickname: "Denisa",
     weightClass: "Light Heavyweight - 205 pounds (93.0 kg)",
     rank: "#2 Light Heavyweight",
@@ -713,7 +713,7 @@ fighters.push(
   },
   {
     firstName: "Julianna",
-    lastName: "Peña",
+    lastName: "Pena",
     nickname: "The Venezuelan Vixen",
     weightClass: "Women's Bantamweight - 135 pounds (61.2 kg)",
     rank: "Bantamweight Champion",
@@ -771,7 +771,7 @@ fighters.push(
     image: VirnaJandiroba_URL
   },
   {
-    firstName: "Jéssica",
+    firstName: "Jessica",
     lastName: "Andrade",
     nickname: "Bate Estaca",
     weightClass: "Women's Strawweight - 115 pounds (52.2 kg)",

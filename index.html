@@ -9,9 +9,61 @@
   </head>
 
   <body>
-    <header class="main-header">
-      <h1 class="title">UFC Fighters</h1>
-    </header>
+      <header class="main-header">
+    <div class="header-top">
+      <div class="filter-container">
+        <button id="filter-toggle">☰ Filter</button>
+        <div id="filter-menu" class="hidden">
+          <label for="weight-filter">Weight Class:</label>
+          <select id="weight-filter">
+            <option value="">All</option>
+            <option value="Flyweight">Flyweight</option>
+            <option value="Bantamweight">Bantamweight</option>
+            <option value="Featherweight">Featherweight</option>
+            <option value="Lightweight">Lightweight</option>
+            <option value="Welterweight">Welterweight</option>
+            <option value="Middleweight">Middleweight</option>
+            <option value="Light Heavyweight">Light Heavyweight</option>
+            <option value="Heavyweight">Heavyweight</option>
+            <option value="Women's Strawweight">Women's Strawweight</option>
+            <option value="Women's Flyweight">Women's Flyweight</option>
+            <option value="Women's Bantamweight">Women's Bantamweight</option>
+          </select>
+
+          <label for="style-filter">Fighting Style:</label>
+          <select id="style-filter">
+            <option value="">All</option>
+            <option value="Wrestling">Wrestling</option>
+            <option value="Striking">Striking</option>
+            <option value="Jiu-Jitsu">Jiu-Jitsu</option>
+            <option value="Boxing">Boxing</option>
+            <option value="Sambo">Sambo</option>
+            <option value="Taekwondo">Taekwondo</option>
+          </select>
+        </div>
+      </div>
+
+    <div class="logo-container">
+      <img src="https://pngimg.com/uploads/ufc/ufc_PNG12.png" alt="UFC Logo" class="ufc-logo" />
+    </div>
+
+      <div class="sort-search-wrapper">
+         <label for="sort-select">Sort By:</label>
+         <select id="sort-select">
+         <option value="">-- Select --</option>
+         <option value="wins">Most Wins</option>
+         <option value="losses">Most Losses</option>
+         <option value="lastName">Last Name (A-Z)</option>
+         <option value="record">Best Win Rate</option>
+      </select>
+
+      <input type="text" id="search-input" placeholder="Search fighters..." />
+    </div>
+
+      </div>
+    </div>
+  </header>
+
     <div id="card-container"></div>
     <div class="card" style="display: none">
       <div class="card-content">
@@ -24,9 +76,11 @@
         </ul>
       </div>
     </div>
+
     <div class="footer">
       <button onclick="quoteAlert();">Get A Quote!</button>
       <button onclick="removeLastCard();">Remove A Card!</button>
     </div>
+
   </body>
 </html>

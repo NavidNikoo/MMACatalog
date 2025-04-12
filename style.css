@@ -32,6 +32,12 @@ body {
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin: 5px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .card-content {
@@ -70,3 +76,120 @@ button {
   cursor: pointer;
   margin: 5px;
 }
+
+
+/*Dropdown menu*/
+.filter-container {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+}
+
+#filter-toggle {
+  font-size: 1rem;
+  padding: 6px 10px;
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#filter-menu {
+  margin-top: 10px;
+  background-color: white;
+  color: black;
+  padding: 10px;
+  border-radius: 8px;
+  position: absolute;
+  z-index: 100;
+}
+
+.hidden {
+  display: none;
+}
+
+/*Search Bar*/
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 10px;
+  position: relative;
+}
+
+.search-container {
+  align-self: flex-end;
+}
+
+#search-input {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: none;
+  font-size: 14px;
+}
+
+/*UFC Logo*/
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.ufc-logo {
+  max-height: 80px;
+  opacity: 0.9;
+  transition: transform 0.3s ease;
+}
+
+.ufc-logo:hover {
+  transform: scale(1.05);
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f44336; /* red */
+}
+
+/*Sort container*/
+.sort-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
+#sort-select {
+  padding: 4px;
+  font-size: 14px;
+}
+
+.sort-search-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 10px 20px;
+  background-color: #ff4b3e;
+}
+
+.sort-search-wrapper label {
+  font-weight: bold;
+  color: white;
+}
+
+#sort-select,
+#search-input {
+  padding: 6px 10px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+
