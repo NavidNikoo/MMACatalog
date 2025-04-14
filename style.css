@@ -1,12 +1,14 @@
+/* Reset default margins and padding */
 html,
 body {
   margin: 0;
   padding: 0;
 }
 
+/* ====== HEADER STYLES ====== */
 header.main-header {
   width: 100%;
-  background-color: #ef4444; /* red-500 */
+  background-color: #ef4444; /* Tailwind red-500 */
   padding: 1rem;
   box-sizing: border-box;
 }
@@ -16,15 +18,16 @@ header.main-header {
   margin: 0;
 }
 
+/* ====== CARD LAYOUT ====== */
 #card-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
   gap: 20px;
   padding: 40px;
-  justify-items: center;
+  justify-items: center; /* Center cards in grid */
 }
 
-
+/* Individual fighter cards */
 .card {
   background: white;
   border-radius: 12px;
@@ -34,22 +37,18 @@ header.main-header {
   transition: all 0.3s ease;
 }
 
+/* Hover effect on cards */
 .card:hover {
   transform: scale(1.02);
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   transition: all 0.2s ease;
 }
 
-
+/* Card content */
 .card-content {
   padding: 20px;
   font-family: "Verdana";
   color: #000000;
-}
-
-h2 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.7rem;
 }
 
 .card-content h2 {
@@ -57,36 +56,35 @@ h2 {
   font-size: 20px;
 }
 
-.card .image-wrapper {
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  overflow: hidden;
-  border-radius: 8px;
-}
-
+/* Image styling for cards */
 .card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
+/* Name and nickname text */
 .card h2 {
+  font-family: 'Bebas Neue', sans-serif;
   font-size: 1.3rem;
   font-weight: bold;
   margin-bottom: 0.25rem;
 }
 
+/* Nickname appearance (optional italic) */
 .card h2 em {
   font-style: italic;
   font-weight: normal;
   color: #555;
 }
 
+/* Highlight first stat (e.g. country or weight) */
 .card ul li:first-child {
   font-weight: bold;
-  color: #000000; /* UFC red */
+  color: #000000;
 }
 
+/* ====== FOOTER STYLES ====== */
 .footer {
   display: flex;
   justify-content: center;
@@ -94,12 +92,12 @@ h2 {
   padding: 10px;
 }
 
+/* Basic button styling */
 button {
   text-align: center;
   background-color: #666;
   border: none;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 0 10px;
   height: 40px;
   border-radius: 10px;
   color: white;
@@ -108,8 +106,7 @@ button {
   margin: 5px;
 }
 
-
-/*Dropdown menu*/
+/* ====== FILTER DROPDOWN ====== */
 .filter-container {
   position: absolute;
   top: 10px;
@@ -140,17 +137,13 @@ button {
   display: none;
 }
 
-/*Search Bar*/
+/* ====== SEARCH BAR ====== */
 .header-top {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   padding: 10px;
   position: relative;
-}
-
-.search-container {
-  align-self: flex-end;
 }
 
 #search-input {
@@ -160,7 +153,7 @@ button {
   font-size: 14px;
 }
 
-/*UFC Logo*/
+/* ====== UFC LOGO ====== */
 .logo-container {
   display: flex;
   justify-content: center;
@@ -178,26 +171,22 @@ button {
   transform: scale(1.05);
 }
 
+/* Header bar styling */
 .header-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #f44336; /* red */
+  background-color: #f44336;
 }
 
-/*Sort container*/
+/* ====== SORTING ====== */
 .sort-container {
   display: flex;
   align-items: center;
   gap: 8px;
   margin-left: auto;
   margin-right: 1rem;
-}
-
-#sort-select {
-  padding: 4px;
-  font-size: 14px;
 }
 
 .sort-search-wrapper {
@@ -223,7 +212,7 @@ button {
   font-size: 14px;
 }
 
-/*Star*/
+/* ====== FAVORITE STAR ====== */
 .favorite-star {
   font-size: 1.5rem;
   color: gray;
@@ -241,17 +230,13 @@ button {
   color: gold;
 }
 
+/* Visual highlight for champions */
 .card.champion {
   border: 2px solid gold;
   box-shadow: 0 0 10px gold;
 }
 
-.card:hover {
-  transform: scale(1.02);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-  transition: 0.3s ease;
-}
-
+/* Section header styling */
 .section-title {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 2rem;
@@ -260,6 +245,7 @@ button {
   color: #111;
 }
 
+/* ====== DARK MODE ====== */
 .dark-mode-btn {
   margin-left: 20px;
   padding: 8px 14px;
@@ -275,6 +261,7 @@ button {
   background-color: #555;
 }
 
+/* Dark theme styles */
 body.dark-mode {
   background-color: #121212;
   color: #f0f0f0;
@@ -286,16 +273,10 @@ body.dark-mode .card {
   border-color: #444;
 }
 
-body.dark-mode .card h2 {
-  color: #808080; /* or #f0f0f0 if you want brighter names */
-}
-
-body.dark-mode .card ul li {
-  color: #808080; /* soft gray for fighter details */
-}
-
+body.dark-mode .card h2,
+body.dark-mode .card ul li,
 body.dark-mode .card ul li strong {
-  color: #808080; /* slightly brighter for bolded labels */
+  color: #808080;
 }
 
 body.dark-mode .sort-search-wrapper,
@@ -303,14 +284,21 @@ body.dark-mode .main-header {
   background-color: #222;
 }
 
+/* Nickname dark mode override */
+body.dark-mode .nickname {
+  color: #808080; /* light gray or choose something softer */
+}
+
+/* ====== NICKNAME STYLING ====== */
 .nickname {
-  font-family: 'Lora', serif; /* or 'Pacifico', cursive */
+  font-family: 'Lora', serif;
   font-style: italic;
   font-size: 1rem;
   color: #111;
   margin: 0 6px;
 }
 
+/* ====== HIGHLIGHT BUTTON ====== */
 .highlight-btn {
   display: block;
   margin: 12px auto 0 auto;

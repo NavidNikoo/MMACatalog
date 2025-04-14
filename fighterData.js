@@ -1,8 +1,66 @@
+// ================================
+// UFC Fighter Catalog Data
+// ================================
 
+/*
+This file defines the fighter data used throughout the MMA Catalog web application.
+It stores an array of fighter objects, where each object contains all relevant information
+about a single UFC fighter.
+
+Each fighter has:
+- Basic identity: first name, last name, nickname, gender, country
+- Competitive stats: weight class, rank (champion, top 10, etc.), wins, losses, fighting style
+- Status: active (true/false)
+- Media assets: full-body image and a highlight GIF
+
+This data is used to dynamically generate fighter "cards" via JavaScript in `scripts.js`,
+allowing features like filtering, sorting, searching, favoriting, and toggling GIFs.
+*/
+
+// ================================
+// Fighter List
+// ================================
+
+// The main list of all fighters to be displayed
 const fighters = []
-const favorites = new Set(); //Set so there can be no duplicates
 
-//dimensions of all images: 460 x 700
+// Keeps track of "favorite" fighters selected by the user
+// A set is used to automatically prevent duplicates
+const favorites = new Set();
+
+/*
+These are image URL constants representing high-quality full-body images
+of UFC champions, all hosted by UFC's official website
+
+Storing them in variables helps make the `fighters.push()` section more readable,
+and lets us easily reuse or update image links later.
+Note: All images are 460x700 px, gifs vary in size
+*/
+
+// ================================
+// Push Fighters into Array
+// ================================
+
+/*
+Each fighter is added to the array using `fighters.push()` with a structured object.
+
+Fields include:
+- firstName / lastName: Fighter's real name
+- gender: "Male" or "Female"
+- country: Country flags and labels
+- nickname: Optional nickname (may be blank if fighter opts out of nickname)
+- weightClass: e.g. "Featherweight"
+- rank: Champion title or ranking
+- wins / losses: Fight record
+- style: Martial arts base(s)
+- active: true/false to indicate if they're still competing
+- image: PNG full-body render
+ - highlightGif: short animated gif to show a little bit of the fighter's personality
+
+These fields are dynamically injected into fighter cards in `scripts.js`
+using the `editCardContent()` function.
+*/
+
 
 //Male Champion Images
 const AlexandrePantoja_URL = "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/5/PANTOJA_ALEXANDRE_L_BELT_12-07.png?itok=qxZeUTNB";

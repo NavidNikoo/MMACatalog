@@ -33,52 +33,54 @@
  * This handles displaying, filtering, and searching through fighters.
  */
 
+// Track the currently displayed fighter list (filtered/sorted version)
+let currentFighters = [...fighters]; // Initially includes all fighters
 
-let currentFighters = [...fighters]; // The list currently being displayed
-
-// Show all fighter cards on the page (default = all fighters)
+/**
+ * Renders all fighter cards to the page
+ * If a filtered list is passed in, it renders only those fighters
+ */
 function showCards(filtered = fighters) {
   const cardContainer = document.getElementById("card-container");
-  cardContainer.innerHTML = ""; // Clear existing cards
-  const templateCard = document.querySelector(".card");
+  cardContainer.innerHTML = ""; // Clear previously displayed cards
+  const templateCard = document.querySelector(".card"); // Hidden card used for cloning
 
-  // Loop through the fighter data and create a card for each one
   for (let i = 0; i < filtered.length; i++) {
     const fighter = filtered[i];
-    const nextCard = templateCard.cloneNode(true); // Clone hidden template
-    editCardContent(nextCard, fighter); // Fill in fighter data
-    cardContainer.appendChild(nextCard); // Add to page
+    const nextCard = templateCard.cloneNode(true); // Clone the template
+    editCardContent(nextCard, fighter); // Fill in fighter info
+    cardContainer.appendChild(nextCard); // Display it
   }
 }
 
-// Fill in content for a single card with fighter data
+/**
+ * Updates the content of a card element with the given fighter's data
+ */
 function editCardContent(card, fighter) {
   card.style.display = "block";
-
   const cardHeader = card.querySelector("h2");
   const fighterId = fighter.firstName + fighter.lastName;
 
-  // Insert the fighter name and the star span into the header
-  const nickname = fighter.nickname ? `"${fighter.nickname}" ` : "";
+  // Add nickname (if available) styled in a span + favorite star
   cardHeader.innerHTML = `
-  ${fighter.firstName} ${fighter.nickname ? `<span class="nickname">"${fighter.nickname}"</span>` : ""} ${fighter.lastName}
-  <span class="favorite-star" data-id="${fighterId}">☆</span>
-`;
+    ${fighter.firstName} ${fighter.nickname ? `<span class="nickname">"${fighter.nickname}"</span>` : ""} ${fighter.lastName}
+    <span class="favorite-star" data-id="${fighterId}">☆</span>
+  `;
 
-  // Set image
+  // Set fighter image and hover GIF logic
   const cardImage = card.querySelector("img");
   cardImage.src = fighter.image;
   cardImage.alt = `${fighter.firstName} ${fighter.lastName} Image`;
 
   cardImage.addEventListener("mouseenter", () => {
-  cardImage.src = fighter.highlightGif;
+    cardImage.src = fighter.highlightGif;
   });
 
   cardImage.addEventListener("mouseleave", () => {
-  cardImage.src = fighter.image;
+    cardImage.src = fighter.image;
   });
 
-  // Fill fighter stats
+  // Fighter stats using emoji for clarity
   const ul = card.querySelector("ul");
   ul.innerHTML = `
     <li><strong>🌎 Country:</strong> ${fighter.country}</li>
@@ -89,13 +91,13 @@ function editCardContent(card, fighter) {
     <li><strong>✅ Active:</strong> ${fighter.active ? "Yes" : "No"}</li>
   `;
 
+  // Highlight champions visually
   if (fighter.rank && fighter.rank.includes("Champion")) {
     card.classList.add("champion");
   }
 
-  // Handle the star logic
+  // Favorite star toggle (visual + logic)
   const star = card.querySelector(".favorite-star");
-
   if (favorites.has(fighterId)) {
     star.classList.add("favorited");
     star.textContent = "★";
@@ -113,33 +115,31 @@ function editCardContent(card, fighter) {
     }
   });
 
-    // Create the highlight button
+  // Add a highlight button to manually trigger fight GIF
   const highlightBtn = document.createElement("button");
   highlightBtn.textContent = "🎥 View Highlight";
   highlightBtn.classList.add("highlight-btn");
 
-  // Event listener to toggle between image and GIF
+  // Swap between regular image and GIF on click
   highlightBtn.addEventListener("click", () => {
     const isGif = cardImage.src.endsWith(".gif");
     cardImage.src = isGif ? fighter.image : fighter.highlightGif;
   });
 
   card.appendChild(highlightBtn);
-
 }
 
-// Runs once when the page first loads, displays all cards
-document.addEventListener("DOMContentLoaded", showCards);
-
-// Pops up a fun quote when "Get A Quote!" is clicked
+/**
+ * Quote button (for fun)
+ */
 function quoteAlert() {
-  console.log("Button Clicked!");
-  alert(
-    "I guess I can kiss heaven goodbye, because it got to be a sin to look this good!"
-  );
+  alert("I guess I can kiss heaven goodbye, because it got to be a sin to look this good!");
 }
 
-// Filter fighters based on selected dropdown values
+/**
+ * Filter fighters by selected weight and style
+ * Updates currentFighters list and re-renders
+ */
 function filterFighters() {
   const weightValue = document.getElementById("weight-filter").value;
   const styleValue = document.getElementById("style-filter").value;
@@ -157,8 +157,9 @@ function filterFighters() {
   showCards(currentFighters);
 }
 
-
-// Render filtered fighter cards to the page
+/**
+ * Rebuilds the visible cards with a provided filtered list
+ */
 function displayFilteredFighters(filteredList) {
   const cardContainer = document.getElementById("card-container");
   cardContainer.innerHTML = "";
@@ -171,25 +172,27 @@ function displayFilteredFighters(filteredList) {
   });
 }
 
+/**
+ * Sorting and UI event listeners on page load
+ */
 document.addEventListener("DOMContentLoaded", () => {
   showCards();
 
-  // Filter Toggle
+  // Toggle filter panel visibility
   const filterToggle = document.getElementById("filter-toggle");
   const filterMenu = document.getElementById("filter-menu");
   filterToggle.addEventListener("click", () => {
     filterMenu.classList.toggle("hidden");
   });
 
-  // Filters
+  // Filtering logic
   document.getElementById("weight-filter").addEventListener("change", filterFighters);
   document.getElementById("style-filter").addEventListener("change", filterFighters);
 
-  // Search
+  // Search box logic
   const searchInput = document.getElementById("search-input");
   searchInput.addEventListener("input", function () {
     const query = this.value.toLowerCase();
-
     currentFighters = fighters.filter((fighter) => {
       return (
         fighter.firstName.toLowerCase().includes(query) ||
@@ -201,13 +204,10 @@ document.addEventListener("DOMContentLoaded", () => {
       );
     });
 
-showCards(currentFighters);
-
-
-    showCards(filteredFighters);
+    showCards(currentFighters);
   });
 
-  // Sort
+  // Sorting logic
   const sortSelect = document.getElementById("sort-select");
   sortSelect.addEventListener("change", function () {
     const selected = this.value;
@@ -215,7 +215,9 @@ showCards(currentFighters);
   });
 });
 
-
+/**
+ * Sorting fighters based on user-selected criteria
+ */
 function sortFighters(criterion) {
   let sorted = [...currentFighters];
 
@@ -223,7 +225,7 @@ function sortFighters(criterion) {
     sorted.sort((a, b) => b.wins - a.wins);
   } else if (criterion === "losses") {
     sorted.sort((a, b) => b.losses - a.losses);
-  }else if (criterion === "Male") {
+  } else if (criterion === "Male") {
     sorted = fighters.filter(f => f.gender === "Male");
   } else if (criterion === "Female") {
     sorted = fighters.filter(f => f.gender === "Female");
@@ -233,12 +235,15 @@ function sortFighters(criterion) {
     const winRate = (f) => f.wins / (f.wins + f.losses);
     sorted.sort((a, b) => winRate(b) - winRate(a));
   } else if (criterion === "favorites") {
-  sorted = fighters.filter(f => favorites.has(f.firstName + f.lastName));
+    sorted = fighters.filter(f => favorites.has(f.firstName + f.lastName));
   }
 
   showCards(sorted);
 }
 
+/**
+ * Toggles dark mode styling for the entire site
+ */
 function toggleDarkMode() {
   document.body.classList.toggle("dark-mode");
 }

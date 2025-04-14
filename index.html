@@ -2,79 +2,94 @@
 <html>
   <head>
     <meta charset="UTF-8" />
+
+    <!-- Fonts for styling -->
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,400&display=swap" rel="stylesheet">
+
     <title>UFC Fighters | Home</title>
     <meta name="description" content="A Catalog of UFC Fighters" />
+
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css" />
-    <script type="text/javascript" src="fighterData.js"></script>
-    <script type="text/javascript" src="scripts.js"></script>
+
+    <!-- Load JS Data & Behavior -->
+    <script type="text/javascript" src="fighterData.js" defer></script>
+    <script type="text/javascript" src="scripts.js" defer></script>
+    <!-- ^ Use `defer` to ensure scripts run after HTML is loaded -->
   </head>
 
   <body>
-      <header class="main-header">
-    <div class="header-top">
-      <div class="filter-container">
-        <button id="filter-toggle">☰ Filter</button>
-        <div id="filter-menu" class="hidden">
-          <label for="weight-filter">Weight Class:</label>
-          <select id="weight-filter">
-            <option value="">All</option>
-            <option value="Male's Flyweight">Male's Flyweight - 125 pounds (56.7 kg)</option>
-            <option value="Male's Bantamweight">Male's Bantamweight - 135 pounds (61.2 kg)</option>
-            <option value="Male's Featherweight">Male's Featherweight - 145 pounds (65.8 kg)</option>
-            <option value="Male's Lightweight">Male's Lightweight - 155 pounds (70.3 kg)</option>
-            <option value="Male's Welterweight">Male's Welterweight - 170 pounds (77.1 kg)</option>
-            <option value="Male's Middleweight">Male's Middleweight - 185 pounds (83.9 kg)</option>
-            <option value="Male's Light Heavyweight">Male's Light Heavyweight - 205 pounds (93.0 kg)</option>
-            <option value="Male's Heavyweight">Male's Heavyweight - 265 pounds (120.2 kg)</option>
-            <option value="Women's Strawweight">Women's Strawweight - 115 pounds (52.2 kg)</option>
-            <option value="Women's Flyweight">Women's Flyweight - 125 pounds (56.7 kg)</option>
-            <option value="Women's Bantamweight">Women's Bantamweight - 135 pounds (61.2 kg)</option>
-          </select>
+    <!-- Main Header -->
+    <header class="main-header">
+      <div class="header-top">
 
-          <label for="style-filter">Fighting Style:</label>
-          <select id="style-filter">
-            <option value="">All</option>
-            <option value="Wrestling">Wrestling</option>
-            <option value="Striking">Striking</option>
-            <option value="Jiu-Jitsu">Jiu-Jitsu</option>
-            <option value="Boxing">Boxing</option>
-            <option value="Sambo">Sambo</option>
-            <option value="Taekwondo">Taekwondo</option>
-          </select>
+        <!-- Filter Dropdown Section -->
+        <div class="filter-container">
+          <button id="filter-toggle">☰ Filter</button>
+          <div id="filter-menu" class="hidden">
+            <label for="weight-filter">Weight Class:</label>
+            <select id="weight-filter">
+              <option value="">All</option>
+              <!-- Try sorting by weight order for better UX -->
+              <option value="Male's Flyweight">Male's Flyweight - 125</option>
+              <option value="Women's Flyweight">Women's Flyweight - 125</option>
+              <option value="Male's Bantamweight">Male's Bantamweight - 135</option>
+              <option value="Women's Bantamweight">Women's Bantamweight - 135</option>
+              <option value="Male's Featherweight">145</option>
+              <option value="Male's Lightweight">155</option>
+              <option value="Male's Welterweight">170</option>
+              <option value="Male's Middleweight">185</option>
+              <option value="Male's Light Heavyweight">205</option>
+              <option value="Male's Heavyweight">265</option>
+              <option value="Women's Strawweight">Women's Strawweight - 115</option>
+            </select>
+
+            <label for="style-filter">Fighting Style:</label>
+            <select id="style-filter">
+              <option value="">All</option>
+              <option value="Wrestling">Wrestling</option>
+              <option value="Striking">Striking</option>
+              <option value="Jiu-Jitsu">Jiu-Jitsu</option>
+              <option value="Boxing">Boxing</option>
+              <option value="Sambo">Sambo</option>
+              <option value="Taekwondo">Taekwondo</option>
+            </select>
+          </div>
         </div>
+
+        <!-- UFC Logo -->
+        <div class="logo-container">
+          <img src="https://pngimg.com/uploads/ufc/ufc_PNG12.png" alt="UFC Logo" class="ufc-logo" />
+        </div>
+
+        <!-- Sorting and Searching Section -->
+        <div class="sort-search-wrapper">
+          <label for="sort-select">Sort By:</label>
+          <select id="sort-select">
+            <option value="">-- Select --</option>
+            <option value="wins">Most Wins</option>
+            <option value="losses">Most Losses</option>
+            <option value="Male">Male Fighters</option>
+            <option value="Female">Female Fighters</option>
+            <option value="lastName">Last Name (A-Z)</option>
+            <option value="record">Best Win Rate</option>
+            <option value="favorites">Favorites ⭐</option>
+          </select>
+
+          <input type="text" id="search-input" placeholder="Search fighters..." />
+        </div>
+
+        <!-- Dark Mode Toggle -->
+        <button onclick="toggleDarkMode()" class="dark-mode-btn">🌙 Dark Mode</button>
       </div>
+    </header>
 
-    <div class="logo-container">
-      <img src="https://pngimg.com/uploads/ufc/ufc_PNG12.png" alt="UFC Logo" class="ufc-logo" />
-    </div>
-
-      <div class="sort-search-wrapper">
-         <label for="sort-select">Sort By:</label>
-         <select id="sort-select">
-         <option value="">-- Select --</option>
-         <option value="wins">Most Wins</option>
-         <option value="losses">Most Losses</option>
-         <option value="Male">Male Fighters</option>
-         <option value="Female">Female Fighters</option>
-         <option value="lastName">Last Name (A-Z)</option>
-         <option value="record">Best Win Rate</option>
-         <option value="favorites">Favorites ⭐</option>
-      </select>
-
-      <input type="text" id="search-input" placeholder="Search fighters..." />
-    </div>
-
-    <button onclick="toggleDarkMode()" class="dark-mode-btn">🌙 Dark Mode</button>
-
-
-      </div>
-    </div>
-  </header>
-
+    <!-- Card Container for Fighter Profiles -->
     <div id="card-container"></div>
+
+    <!-- Template Card (hidden, will be cloned dynamically) -->
     <div class="card" style="display: none">
       <div class="card-content">
         <h2>Fighter Name</h2>
@@ -88,6 +103,5 @@
         </ul>
       </div>
     </div>
-
   </body>
 </html>
