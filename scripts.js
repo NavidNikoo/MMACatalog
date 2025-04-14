@@ -56,19 +56,63 @@ function editCardContent(card, fighter) {
   card.style.display = "block";
 
   const cardHeader = card.querySelector("h2");
-  cardHeader.textContent = `${fighter.firstName} "${fighter.nickname}" ${fighter.lastName}`;
+  const fighterId = fighter.firstName + fighter.lastName;
 
+  // Insert the fighter name and the star span into the header
+  const nickname = fighter.nickname ? `"${fighter.nickname}" ` : "";
+  cardHeader.innerHTML = `
+    ${fighter.firstName} ${nickname}${fighter.lastName}
+    <span class="favorite-star" data-id="${fighterId}">☆</span>
+  `;
+
+
+  // Set image
   const cardImage = card.querySelector("img");
   cardImage.src = fighter.image;
-  cardImage.alt = `${fighter.name} Image`;
+  cardImage.alt = `${fighter.firstName} ${fighter.lastName} Image`;
 
+  cardImage.addEventListener("mouseenter", () => {
+  cardImage.src = fighter.highlightGif;
+  });
+
+  cardImage.addEventListener("mouseleave", () => {
+  cardImage.src = fighter.image;
+  });
+
+  // Fill fighter stats
   const ul = card.querySelector("ul");
   ul.innerHTML = `
-    <li>Weight Class: ${fighter.weightClass}</li>
-    <li>Record: ${fighter.wins}-${fighter.losses}</li>
-    <li>Style: ${fighter.style}</li>
-    <li>Active: ${fighter.active ? "Yes" : "No"}</li>
+    <li><strong>🌎 Country:</strong> ${fighter.country}</li>
+    <li><strong>🏋️‍♂️ Weight Class:</strong> ${fighter.weightClass}</li>
+    <li><strong>📊 Record:</strong> ${fighter.wins}-${fighter.losses}</li>
+    <li><strong>👑 Rank:</strong> ${fighter.rank}</li>
+    <li><strong>🥋 Style:</strong> ${fighter.style}</li>
+    <li><strong>✅ Active:</strong> ${fighter.active ? "Yes" : "No"}</li>
   `;
+
+  if (fighter.rank && fighter.rank.includes("Champion")) {
+    card.classList.add("champion");
+  }
+
+  // Handle the star logic
+  const star = card.querySelector(".favorite-star");
+
+  if (favorites.has(fighterId)) {
+    star.classList.add("favorited");
+    star.textContent = "★";
+  }
+
+  star.addEventListener("click", () => {
+    if (favorites.has(fighterId)) {
+      favorites.delete(fighterId);
+      star.classList.remove("favorited");
+      star.textContent = "☆";
+    } else {
+      favorites.add(fighterId);
+      star.classList.add("favorited");
+      star.textContent = "★";
+    }
+  });
 }
 
 // Runs once when the page first loads, displays all cards
@@ -88,7 +132,11 @@ function filterFighters() {
   const styleValue = document.getElementById("style-filter").value;
 
   currentFighters = fighters.filter(f => {
-    const matchWeight = weightValue === "" || f.weightClass.includes(weightValue);
+    const matchWeight =
+      weightValue === "" ||
+      f.weightClass.includes(weightValue) ||
+      `${f.gender}'s ${f.weightClass}` === weightValue;
+
     const matchStyle = styleValue === "" || f.style.includes(styleValue);
     return matchWeight && matchStyle;
   });
@@ -162,13 +210,22 @@ function sortFighters(criterion) {
     sorted.sort((a, b) => b.wins - a.wins);
   } else if (criterion === "losses") {
     sorted.sort((a, b) => b.losses - a.losses);
+  }else if (criterion === "Male") {
+    sorted = fighters.filter(f => f.gender === "Male");
+  } else if (criterion === "Female") {
+    sorted = fighters.filter(f => f.gender === "Female");
   } else if (criterion === "lastName") {
     sorted.sort((a, b) => a.lastName.localeCompare(b.lastName));
   } else if (criterion === "record") {
     const winRate = (f) => f.wins / (f.wins + f.losses);
     sorted.sort((a, b) => winRate(b) - winRate(a));
+  } else if (criterion === "favorites") {
+  sorted = fighters.filter(f => favorites.has(f.firstName + f.lastName));
   }
 
   showCards(sorted);
 }
 
+function toggleDarkMode() {
+  document.body.classList.toggle("dark-mode");
+}
