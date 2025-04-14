@@ -65,8 +65,6 @@ function editCardContent(card, fighter) {
   <span class="favorite-star" data-id="${fighterId}">☆</span>
 `;
 
-
-
   // Set image
   const cardImage = card.querySelector("img");
   cardImage.src = fighter.image;
@@ -114,6 +112,20 @@ function editCardContent(card, fighter) {
       star.textContent = "★";
     }
   });
+
+    // Create the highlight button
+  const highlightBtn = document.createElement("button");
+  highlightBtn.textContent = "🎥 View Highlight";
+  highlightBtn.classList.add("highlight-btn");
+
+  // Event listener to toggle between image and GIF
+  highlightBtn.addEventListener("click", () => {
+    const isGif = cardImage.src.endsWith(".gif");
+    cardImage.src = isGif ? fighter.image : fighter.highlightGif;
+  });
+
+  card.appendChild(highlightBtn);
+
 }
 
 // Runs once when the page first loads, displays all cards
