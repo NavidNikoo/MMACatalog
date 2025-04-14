@@ -61,9 +61,10 @@ function editCardContent(card, fighter) {
   // Insert the fighter name and the star span into the header
   const nickname = fighter.nickname ? `"${fighter.nickname}" ` : "";
   cardHeader.innerHTML = `
-    ${fighter.firstName} ${nickname}${fighter.lastName}
-    <span class="favorite-star" data-id="${fighterId}">☆</span>
-  `;
+  ${fighter.firstName} ${fighter.nickname ? `<span class="nickname">"${fighter.nickname}"</span>` : ""} ${fighter.lastName}
+  <span class="favorite-star" data-id="${fighterId}">☆</span>
+`;
+
 
 
   // Set image

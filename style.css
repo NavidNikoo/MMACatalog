@@ -35,9 +35,11 @@ header.main-header {
 }
 
 .card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: all 0.2s ease;
 }
+
 
 .card-content {
   padding: 20px;
@@ -301,3 +303,10 @@ body.dark-mode .main-header {
   background-color: #222;
 }
 
+.nickname {
+  font-family: 'Lora', serif; /* or 'Pacifico', cursive */
+  font-style: italic;
+  font-size: 1rem;
+  color: #111;
+  margin: 0 6px;
+}
