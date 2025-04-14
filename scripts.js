@@ -72,9 +72,6 @@ function editCardContent(card, fighter) {
   cardImage.src = fighter.image;
   cardImage.alt = `${fighter.firstName} ${fighter.lastName} Image`;
 
-  cardImage.addEventListener("mouseenter", () => {
-    cardImage.src = fighter.highlightGif;
-  });
 
   cardImage.addEventListener("mouseleave", () => {
     cardImage.src = fighter.image;
