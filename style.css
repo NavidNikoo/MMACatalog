@@ -280,10 +280,24 @@ body.dark-mode {
 
 body.dark-mode .card {
   background-color: #1e1e1e;
+  color: #808080;
   border-color: #444;
+}
+
+body.dark-mode .card h2 {
+  color: #808080; /* or #f0f0f0 if you want brighter names */
+}
+
+body.dark-mode .card ul li {
+  color: #808080; /* soft gray for fighter details */
+}
+
+body.dark-mode .card ul li strong {
+  color: #808080; /* slightly brighter for bolded labels */
 }
 
 body.dark-mode .sort-search-wrapper,
 body.dark-mode .main-header {
   background-color: #222;
 }
+
