@@ -37,11 +37,10 @@ MMACatalog/ ├── index.html # Main HTML page ├── style.css # All styl
 
 ## ⚡ Future Ideas
 
-- Persistent favorites using `localStorage`
-- Import fighter data from a `.json` file or live API
+- Add audio pronunciation for fighter names
 - Add championship history or stats charts
-- Pagination for large datasets
 - Responsive design improvements for mobile devices
+- Include a “Compare Fighters” feature side-by-side
 
 ## 📬 Contact
 
