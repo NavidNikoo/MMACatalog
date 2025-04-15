@@ -127,12 +127,6 @@ function editCardContent(card, fighter) {
   card.appendChild(highlightBtn);
 }
 
-/**
- * Quote button (for fun)
- */
-function quoteAlert() {
-  alert("I guess I can kiss heaven goodbye, because it got to be a sin to look this good!");
-}
 
 /**
  * Filter fighters by selected weight and style
