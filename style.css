@@ -6,6 +6,15 @@ body {
 }
 
 /* ====== HEADER STYLES ====== */
+.main-header {
+  background-color: #ef4444; /* Keep this red always */
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+  z-index: 10;
+  position: relative;
+}
+
 header.main-header {
   width: 100%;
   background-color: #ef4444; /* Tailwind red-500 */
@@ -31,7 +40,7 @@ header.main-header {
 .card {
   background: white;
   border-radius: 12px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   padding: 1rem;
   width: 250px;
   transition: all 0.3s ease;
@@ -40,9 +49,10 @@ header.main-header {
 /* Hover effect on cards */
 .card:hover {
   transform: scale(1.02);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  transition: all 0.2s ease;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+  transition: 0.2s ease;
 }
+
 
 /* Card content */
 .card-content {
@@ -54,6 +64,36 @@ header.main-header {
 .card-content h2 {
   margin-top: 0;
   font-size: 20px;
+}
+
+.card ul li {
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+
+.card ul li strong {
+  font-family: 'Oswald', sans-serif;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.card ul li span {
+  font-family: 'Lora', serif;
+  display: block;
+  margin-left: 4px;
+}
+
+
+/*Card Text formatting*/
+.card ul li {
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+
+.card ul li strong {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 2px;
 }
 
 /* Image styling for cards */
@@ -76,12 +116,6 @@ header.main-header {
   font-style: italic;
   font-weight: normal;
   color: #555;
-}
-
-/* Highlight first stat (e.g. country or weight) */
-.card ul li:first-child {
-  font-weight: bold;
-  color: #000000;
 }
 
 /* ====== FOOTER STYLES ====== */
@@ -124,13 +158,20 @@ button {
 }
 
 #filter-menu {
-  margin-top: 10px;
+  position: absolute;
+  top: 100%;
+  left: 0;
   background-color: white;
-  color: black;
   padding: 10px;
   border-radius: 8px;
-  position: absolute;
-  z-index: 100;
+  z-index: 999;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Wrap button and filter box */
+.filter-dropdown-wrapper {
+  position: relative;
+  display: inline-block;
 }
 
 .hidden {
@@ -196,6 +237,7 @@ button {
   gap: 10px;
   padding: 10px 20px;
   background-color: #ff4b3e;
+  border-radius: 12px;
 }
 
 .sort-search-wrapper label {
@@ -280,14 +322,16 @@ body.dark-mode .card ul li strong {
 }
 
 body.dark-mode .sort-search-wrapper,
-body.dark-mode .main-header {
+body.dark-mode {
   background-color: #222;
+  border-radius: 12px;
 }
 
 /* Nickname dark mode override */
 body.dark-mode .nickname {
   color: #808080; /* light gray or choose something softer */
 }
+
 
 /* ====== NICKNAME STYLING ====== */
 .nickname {

@@ -80,13 +80,14 @@ function editCardContent(card, fighter) {
   // Fighter stats using emoji for clarity
   const ul = card.querySelector("ul");
   ul.innerHTML = `
-    <li><strong>🌎 Country:</strong> ${fighter.country}</li>
-    <li><strong>🏋️‍♂️ Weight Class:</strong> ${fighter.weightClass}</li>
-    <li><strong>📊 Record:</strong> ${fighter.wins}-${fighter.losses}</li>
-    <li><strong>👑 Rank:</strong> ${fighter.rank}</li>
-    <li><strong>🥋 Style:</strong> ${fighter.style}</li>
-    <li><strong>✅ Active:</strong> ${fighter.active ? "Yes" : "No"}</li>
+    <li><strong>🌎 Country:</strong><span>${fighter.country}</span></li>
+    <li><strong>🏋️‍♂️ Weight Class:</strong><span>${fighter.weightClass}</span></li>
+    <li><strong>📊 Record:</strong><span>${fighter.wins}-${fighter.losses}</span></li>
+    <li><strong>👑 Rank:</strong><span>${fighter.rank}</span></li>
+    <li><strong>🥋 Style:</strong><span>${fighter.style}</span></li>
+    <li><strong>✅ Active:</strong><span>${fighter.active ? "Yes" : "No"}</span></li>
   `;
+
 
   // Highlight champions visually
   if (fighter.rank && fighter.rank.includes("Champion")) {
